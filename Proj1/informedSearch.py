@@ -1,30 +1,31 @@
+import math
 
 
 # main method for A*(informed search), which will take the index of start point(str),the index of end point(str),
 # and the nodes map(dict)
 def a_star(start_index, goal_index, nodes):
-    close_list = []  # list for nodes which have already evaluated
-    open_list = []  # list for noes which need to be evaluated
+    close_list = {}  # list for nodes which have already evaluated
+    open_list = {}  # list for noes which need to be evaluated
     came_from = {}  # dict for recording the moves
     start_node = nodes[start_index]
     start_node.g = 0
     start_node.h = heuristic(start_node.index, goal_index, nodes)
     start_node.f = start_node.g + start_node.h
-    open_list.append(start_node)
+    open_list[start_node] = 1
     while open_list:
         current_node = get_lowest_f(open_list)
-        open_list.remove(current_node)
-        close_list.append(current_node)
+        del open_list[current_node]
+        close_list[current_node] = 1
         # arrive the goal node, stop searching
         if current_node.index == goal_index:
             return current_node.g
         neighbors = get_neighbors(current_node, nodes)
         for neighbor in neighbors:
             # ignore the neighbor which is the parent
-            if neighbor in close_list:
+            if neighbor in close_list.keys():
                 continue
             tentative_g = current_node.g + int(current_node.edges[neighbor.index])
-            if neighbor not in open_list:
+            if neighbor not in open_list.keys():
                 tentative_better = True
             elif tentative_g < neighbor.g:
                 tentative_better = True
@@ -35,7 +36,7 @@ def a_star(start_index, goal_index, nodes):
                 neighbor.g = tentative_g
                 neighbor.h = heuristic(neighbor.index, goal_index, nodes)
                 neighbor.f = neighbor.g + neighbor.h
-                open_list.append(neighbor)
+                open_list[neighbor] = 1
 
 
 # calculate the h(n) with Manhattan Distance
@@ -48,13 +49,14 @@ def heuristic(current_index, goal_index, nodes):
     goal_y = goal_square // 10
     distance = abs(current_x - goal_x) + abs(current_y - goal_y)
     return distance
+    # return 0
 
 
 # return the node with the lowest f in the open list
 def get_lowest_f(open_list):
-    lowest_f = open_list[0].f
-    return_node = open_list[0]
-    for node in open_list:
+    lowest_f = math.inf
+    return_node = None
+    for node in open_list.keys():
         if node.f < lowest_f:
             lowest_f = node.f
             return_node = node
