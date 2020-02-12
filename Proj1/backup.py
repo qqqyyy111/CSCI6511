@@ -349,3 +349,32 @@
 #     return children
 #
 #
+
+
+
+# in the A star for loop
+# ignore the neighbor which is the parent
+            # if neighbor in close_list.keys():
+            #     continue
+            # # tentative_g = current_node.g + int(current_node.edges[neighbor.index])
+            # tentative_g = g_values[current_node.index] + int(current_node.edges[neighbor.index])
+            # if neighbor not in open_list.keys():
+            #     tentative_better = True
+            # # elif tentative_g < neighbor.g:
+            # elif tentative_g < g_values[neighbor.index]:
+            #     tentative_better = True
+            # else:
+            #     tentative_better = False
+            # if tentative_better:
+            #     # came_from[neighbor.index] = current_node.index
+            #     # neighbor.g = tentative_g
+            #     g_values[neighbor.index] = tentative_g
+            #     # neighbor.h = int(heuristic(neighbor.index, goal_index, nodes))
+            #     h_values[neighbor.index] = int(heuristic(neighbor.index, goal_index, nodes))
+            #     # neighbor.f = neighbor.g + neighbor.h
+            #     f_values[neighbor.index] = g_values[neighbor.index] + h_values[neighbor.index]
+            #     open_list[neighbor] = 1
+            #     close_list[neighbor] = current_node
+
+# ['48', '47', '47', '47', '46', '56', '55', '55', '54', '63', '62', '62', '62', '61']
+# ['99', '88', '88', '87', '87', '86', '85', '85', '74', '72', '61']

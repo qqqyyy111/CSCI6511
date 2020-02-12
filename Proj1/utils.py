@@ -38,11 +38,22 @@ def generate_map(vertex_file, edge_file):
     return vertices
 
 
+# transfer dict to list
+def dict_to_list(end_point, waiting_dict):
+    res = []
+    current = end_point
+    while current:
+        res.append(current)
+        current = waiting_dict[current]
+    return res
 
 
-
-
-
+# get the path according to square
+def get_square_path(path, vertices):
+    res = []
+    for vertex in path:
+        res.append(vertices[vertex].square)
+    return res
 
 
 

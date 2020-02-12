@@ -6,40 +6,33 @@ import math
 def a_star(start_index, goal_index, nodes):
     close_list = {}  # list for nodes which have already evaluated
     open_list = {}  # list for noes which need to be evaluated
-    came_from = {}  # dict for recording the moves
+    h_values = {}
+    g_values = {}
+    f_values = {}
     start_node = nodes[start_index]
-    start_node.g = 0
-    start_node.h = heuristic(start_node.index, goal_index, nodes)
-    start_node.f = start_node.g + start_node.h
+    g_values[start_node.index] = 0
+    h_values[start_node.index] = int(heuristic(start_node.index, goal_index, nodes))
+    f_values[start_node.index] = g_values[start_node.index] + h_values[start_node.index]
     open_list[start_node] = 1
+    close_list[start_node.index] = None
     while open_list:
-        current_node = get_lowest_f(open_list)
+        current_node = get_lowest_f(open_list, f_values)
         del open_list[current_node]
-        close_list[current_node] = 1
         # arrive the goal node, stop searching
         if current_node.index == goal_index:
-            return current_node.g
+            return g_values[current_node.index], close_list
         neighbors = get_neighbors(current_node, nodes)
         for neighbor in neighbors:
-            # ignore the neighbor which is the parent
-            if neighbor in close_list.keys():
-                continue
-            tentative_g = current_node.g + int(current_node.edges[neighbor.index])
-            if neighbor not in open_list.keys():
-                tentative_better = True
-            elif tentative_g < neighbor.g:
-                tentative_better = True
-            else:
-                tentative_better = False
-            if tentative_better:
-                came_from[neighbor.index] = current_node.index
-                neighbor.g = tentative_g
-                neighbor.h = heuristic(neighbor.index, goal_index, nodes)
-                neighbor.f = neighbor.g + neighbor.h
+            tentative_g = g_values[current_node.index] + int(current_node.edges[neighbor.index])
+            if (neighbor.index not in g_values.keys()) or (tentative_g < g_values[neighbor.index]):
+                g_values[neighbor.index] = tentative_g
+                h_values[neighbor.index] = int(heuristic(neighbor.index, goal_index, nodes))
+                f_values[neighbor.index] = g_values[neighbor.index] + h_values[neighbor.index]
                 open_list[neighbor] = 1
+                close_list[neighbor.index] = current_node.index
 
 
-# calculate the h(n) with Manhattan Distance
+# calculate the h(n) with Euclidean Distance
 def heuristic(current_index, goal_index, nodes):
     current_square = int(nodes[current_index].square)
     goal_square = int(nodes[goal_index].square)
@@ -47,18 +40,20 @@ def heuristic(current_index, goal_index, nodes):
     current_y = current_square // 10
     goal_x = goal_square % 10
     goal_y = goal_square // 10
-    distance = abs(current_x - goal_x) + abs(current_y - goal_y)
+    x_difference = max(abs(current_x - goal_x) - 1, 0) * 10
+    y_difference = max(abs(current_y - goal_y) - 1, 0) * 10
+    distance = math.sqrt(math.pow(x_difference, 2) + math.pow(y_difference, 2))
     return distance
     # return 0
 
 
 # return the node with the lowest f in the open list
-def get_lowest_f(open_list):
+def get_lowest_f(open_list, f_values):
     lowest_f = math.inf
     return_node = None
     for node in open_list.keys():
-        if node.f < lowest_f:
-            lowest_f = node.f
+        if f_values[node.index] < lowest_f:
+            lowest_f = f_values[node.index]
             return_node = node
     return return_node
 
@@ -72,3 +67,5 @@ def get_neighbors(current_node, nodes):
         child = nodes[child_index]
         children.append(child)
     return children
+
+

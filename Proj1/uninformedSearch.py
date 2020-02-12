@@ -4,16 +4,19 @@ import math
 # main method for dijkstra(uninformed search), which will take the start point index(str), and the vertices map(dict)
 def dijkstra(start_point, vertices):
     unvisited_vertices = {} # dict of which vertices need to be checked
-    temp_list = list(vertices.keys())  # list for creating unvisited vertices dict
-    for vertex in temp_list:
+    # list for creating unvisited vertices dict
+    for vertex in vertices.keys():
         unvisited_vertices[vertex] = 1
     visited_list = {}
     min_distances = {}  # dictionary {toIndex : minimum_distance}
+    # came_from = {}
     for unvisited_vertex in unvisited_vertices.keys():
         if unvisited_vertex == start_point:
             min_distances[unvisited_vertex] = 0
+            # came_from[unvisited_vertex] = None
         else:
             min_distances[unvisited_vertex] = math.inf
+            # came_from[unvisited_vertex] = start_point
     current_vertex = start_point
     open_list = {}  # contains all possible next moves {toIndex : distance}
     update_open_list(current_vertex,vertices, min_distances, open_list, visited_list)
@@ -21,9 +24,11 @@ def dijkstra(start_point, vertices):
     visited_list[current_vertex] = 1
     while len(unvisited_vertices) != 0:
         shortest_pair = get_shortest_element(open_list)
+        # previous_vertex = current_vertex
         current_vertex = shortest_pair[0]
         if min_distances[current_vertex] > shortest_pair[1]:
             min_distances[current_vertex] = shortest_pair[1]
+            # came_from[current_vertex] = previous_vertex
         update_open_list(current_vertex, vertices, min_distances, open_list, visited_list)
         visited_list[current_vertex] = 1
         del unvisited_vertices[current_vertex]
@@ -41,6 +46,7 @@ def update_open_list(current_vertex, vertices, min_distances, open_list, visited
             possible_minimum = int(vertices[current_vertex].edges[neighbor]) + min_distances[current_vertex]
             if possible_minimum < min_distances[neighbor]:
                 min_distances[neighbor] = possible_minimum
+                # came_from[neighbor] = current_vertex
         else:
             if neighbor in open_list.keys():
                 if (distance + min_distances[current_vertex]) > open_list[neighbor]:
