@@ -27,4 +27,4 @@ How to run:
 Comparision:
     Both Dijkstra and A star will get the optimal result, but not like dijkstra will take steady time, the calculate
     time of a star is not unsteady, it really depends on the value of h, so for same file with different h calculation
-    methods, time cost will be different.
+    methods, time cost will be different. But mostly, the total time cost of A star should be smaller than dijkstra.
