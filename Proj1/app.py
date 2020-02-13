@@ -21,8 +21,8 @@ vertices = utils.generate_map(vertices_file,edges_file)
 
 # test case
 errorNum = 0
-start_point = '0'
-for i in range(900, 1900):
+start_point = '1'
+for i in range(300, 800):
       end_point = str(i)
 
       # return All results
@@ -31,7 +31,7 @@ for i in range(900, 1900):
       # informed_search_end_time = time.time()
       # informed_search_cost = informed_search_end_time - informed_search_start_time
       # print(f'A-star   - start: {start_point} end: {end_point} '
-      #       f'res: {informed_search_res} time cost: {informed_search_cost}')
+      #       f'res: {informed_search_res[0]} time cost: {informed_search_cost}')
       # uninformed_search_start_time = time.time()
       # uninformed_search_res = dijkstra(start_point, vertices)
       # uninformed_search_res_distance = uninformed_search_res[end_point]
@@ -50,7 +50,7 @@ for i in range(900, 1900):
                   f'A-star: {informed_search_res[0]} Dijkstra: {uninformed_search_res[end_point]} \n'
                   f'A-star path: {a_star_path} \n'
                   f'A-star square path: {utils.get_square_path(a_star_path, vertices)}')
-print(f'all test cases passed, {errorNum} errors')
+print(f'all test cases passed, {errorNum} error(s)')
 
 
 # # informed search - A*
