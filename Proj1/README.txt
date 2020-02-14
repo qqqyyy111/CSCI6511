@@ -27,4 +27,9 @@ How to run:
 Comparision:
     Both Dijkstra and A star will get the optimal result, but not like dijkstra will take steady time, the calculate
     time of a star is not unsteady, it really depends on the value of h, so for same file with different h calculation
-    methods, time cost will be different. But mostly, the total time cost of A star should be smaller than dijkstra.
+    methods, time cost will be different. Theologically, A* with priority queue will take O(e + vlogv), and Dijkstra
+    with priority queue should be O(v + elogv). It should works pretty good in puzzles and maze game. However, since
+    we need to concern that the first goal node we get in A star is not the optimal result since key of the priority
+    queue is the f, which f = g + h. So, sometimes, especially the map we generated, the time cost will be highly
+    affected by the f, since the path first time A star reach the goal is not the optimal path, and the distance(g) is
+    not the optimal distance, which A star will take more time to get the optimal result than Dijkstra.
