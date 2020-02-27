@@ -3,7 +3,7 @@ import time
 import utils
 from uninformedSearch import dijkstra
 from informedSearch import a_star
-from test import *
+# from test import *
 
 
 # set the files path and generate the map
