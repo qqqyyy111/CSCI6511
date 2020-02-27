@@ -4,6 +4,9 @@ import math
 # main method for dijkstra(uninformed search), which will take the start point index(str), the index of end point(str),
 # and the vertices map(dict)
 def dijkstra(start_point, end_point, vertices):
+    if start_point == end_point:
+        return 0, 0
+    step_counter = 0
     unvisited_vertices = {} # dict of which vertices need to be checked
     # list for creating unvisited vertices dict
     for vertex in vertices.keys():
@@ -22,6 +25,7 @@ def dijkstra(start_point, end_point, vertices):
     visited_list[current_vertex] = 1
     while len(unvisited_vertices) != 0:
         shortest_pair = get_shortest_element(open_list)
+        step_counter += 1
         current_vertex = shortest_pair[0]
         if min_distances[current_vertex] > shortest_pair[1]:
             min_distances[current_vertex] = shortest_pair[1]
@@ -29,7 +33,7 @@ def dijkstra(start_point, end_point, vertices):
         visited_list[current_vertex] = 1
         del unvisited_vertices[current_vertex]
         if current_vertex == end_point:
-            return min_distances[current_vertex]
+            return min_distances[current_vertex], step_counter
     # return min_distances
 
 

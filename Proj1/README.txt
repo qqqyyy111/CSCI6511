@@ -22,7 +22,18 @@ How to run:
     3. it program is set to run with random start point and end point, if you want to run with specific points, comments
         the random start point and end point generate lines, and de-comment the points specifying lines, then change the
         point index to the index you want to test(please use str for index)
-    4. run the app.py file
+    4. if you want to run multiple cases, uncomment 'from test import *', and choose one of the test method to run,
+        there is a sample test code at the button for pathfinder from 0 to 1000~1500. Before running the test, please
+        uncomment the normal output lines(23 ~ 39)
+    5. run the app.py file
+
+Output:
+    1. A star optimal distance
+    2. A star time cost
+    3. A star algorithm step cost
+    4. Dijkstra optimal distance
+    5. Dijkstra time cost
+    6. Dijkstra algorithm step cost
 
 Comparision:
     Both Dijkstra and A star will get the optimal result, but not like dijkstra will take steady time, the calculate
