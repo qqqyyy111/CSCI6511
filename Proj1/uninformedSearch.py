@@ -34,7 +34,6 @@ def dijkstra(start_point, end_point, vertices):
         del unvisited_vertices[current_vertex]
         if current_vertex == end_point:
             return min_distances[current_vertex], step_counter
-    # return min_distances
 
 
 # check whether the distance from current vertex to the neighbor is the shortest distance

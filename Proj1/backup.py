@@ -454,3 +454,14 @@
 # #                   f'A-star: {informed_search_res[0]} Dijkstra: {uninformed_search_res[end_point]} \n'
 # #                   f'A-star path: {a_star_path}')
 # # print(f'all test cases passed, {errorNum} error(s)')
+
+
+
+#
+# # check whether there is a pair contains goal node in the list
+# def check_node_existence(target_index, open_list):
+#     for pair in open_list:
+#         node_index = pair[1]
+#         if node_index == target_index:
+#             return True
+#     return False

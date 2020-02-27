@@ -23,7 +23,6 @@ def a_star(start_index, goal_index, nodes):
         # arrive the goal node, stop searching
         if current_index == goal_index:
             goal_in_open_list -= 1
-            # if not check_node_existence(current_index, open_list):
             if goal_in_open_list < 1:
                 return g_values[current_index], step_count
         for neighbor in nodes[current_index].edges.keys():
@@ -34,7 +33,6 @@ def a_star(start_index, goal_index, nodes):
                 heapq.heappush(open_list, (f, neighbor))
                 if neighbor == goal_index:
                     goal_in_open_list += 1
-                    # print(goal_in_open_list)
                 # close_list[neighbor] = current_index
 
 
@@ -50,12 +48,3 @@ def heuristic(current_index, goal_index, nodes):
     y_difference = max(abs(current_y - goal_y) - 1, 0) * 10
     distance = math.sqrt(math.pow(x_difference, 2) + math.pow(y_difference, 2))
     return distance
-
-
-# check whether there is a pair contains goal node in the list
-def check_node_existence(target_index, open_list):
-    for pair in open_list:
-        node_index = pair[1]
-        if node_index == target_index:
-            return True
-    return False
