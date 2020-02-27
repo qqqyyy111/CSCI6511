@@ -7,8 +7,8 @@ from informedSearch import a_star
 
 
 # set the files path and generate the map
-vertices_number = '2000'
-file_version = '0.3'
+vertices_number = '100'
+file_version = '0.1'
 vertices_file = './graphs/graph' + vertices_number + '_' + file_version + '/v.txt'
 edges_file = './graphs/graph' + vertices_number + '_' + file_version + '/e.txt'
 map = utils.generate_map(vertices_file,edges_file)
