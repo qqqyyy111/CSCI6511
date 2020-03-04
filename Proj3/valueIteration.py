@@ -19,7 +19,7 @@ def value_iteration(discount, noises, states, grid_size):
         states[(state.row_index, state.col_index)] = copy(max_state)
         del waiting_states
 
-
+# update the state value with max(Q)
 def update(this_state, left, up, right, down, discount, states, grid_size):
     up_row_index = this_state.row_index
     down_row_index = this_state.row_index
