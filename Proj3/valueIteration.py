@@ -19,24 +19,35 @@ def value_iteration(discount, noises, states, grid_size):
         states[(state.row_index, state.col_index)] = copy(max_state)
         del waiting_states
 
+
 # update the state value with max(Q)
 def update(this_state, left, up, right, down, discount, states, grid_size):
     up_row_index = this_state.row_index
     down_row_index = this_state.row_index
     left_col_index = this_state.col_index
     right_col_index = this_state.col_index
+    final_result = 0
     if not up_row_index - 1 < 0:
         up_row_index -= 1
-        this_state.val += (states[(up_row_index, this_state.col_index)].val * up * discount)
+        final_result += (states[(up_row_index, this_state.col_index)].val * up * discount)
+    else:
+        final_result += (this_state.val * up * discount)
     if down_row_index + 1 < grid_size:
         down_row_index += 1
-        this_state.val += (states[(down_row_index, this_state.col_index)].val * down * discount)
+        final_result += (states[(down_row_index, this_state.col_index)].val * down * discount)
+    else:
+        final_result += (this_state.val * down * discount)
     if not left_col_index - 1 < 0:
         left_col_index -= 1
-        this_state.val += (states[(this_state.row_index, left_col_index)].val * left * discount)
+        final_result += (states[(this_state.row_index, left_col_index)].val * left * discount)
+    else:
+        final_result += (this_state.val * left * discount)
     if right_col_index + 1 < grid_size:
         right_col_index += 1
-        this_state.val += (states[(this_state.row_index, right_col_index)].val * right * discount)
+        final_result += (states[(this_state.row_index, right_col_index)].val * right * discount)
+    else:
+        final_result += (this_state.val * right * discount)
+    this_state.val = final_result
 
 
 def do_several_value_iterations(times, discount, noises, states, grid_size):
