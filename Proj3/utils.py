@@ -33,9 +33,9 @@ def print_states(states, grid_size):
         for col_index in range(0, grid_size):
             if not states[(row_index, col_index)].is_terminal:
                 row_str += str(format(states[(row_index, col_index)].val, '.2f'))
-                row_str += ','
+                row_str += ' '
             else:
                 row_str += str(states[(row_index, col_index)].val)
-                row_str += ','
+                row_str += ' '
         print(row_str)
 
