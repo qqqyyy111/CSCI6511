@@ -31,7 +31,11 @@ def print_states(states, grid_size):
     for row_index in range(0, grid_size):
         row_str = ''
         for col_index in range(0, grid_size):
-            row_str += str(format(states[(row_index, col_index)].val, '.2f'))
-            row_str += ','
+            if not states[(row_index, col_index)].is_terminal:
+                row_str += str(format(states[(row_index, col_index)].val, '.2f'))
+                row_str += ','
+            else:
+                row_str += str(states[(row_index, col_index)].val)
+                row_str += ','
         print(row_str)
 
