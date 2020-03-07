@@ -16,28 +16,8 @@ class State:
             self.noises[2] = noises[3]
 
     def update_policy(self, direction, noises):
-        if direction == 0:
-            self.noises[0] = noises[0]
-            self.noises[1] = noises[1]
-            self.noises[2] = noises[3]
-            self.noises[3] = noises[2]
-        elif direction == 1:
-            self.noises[0] = noises[1]
-            self.noises[1] = noises[0]
-            self.noises[2] = noises[2]
-            self.noises[3] = noises[3]
-        elif direction == 2:
-            self.noises[0] = noises[3]
-            self.noises[1] = noises[1]
-            self.noises[2] = noises[0]
-            self.noises[3] = noises[2]
-        else:
-            self.noises[0] = noises[1]
-            self.noises[1] = noises[3]
-            self.noises[2] = noises[2]
-            self.noises[3] = noises[0]
-        # self.noises[direction] = noises[0]
-        # self.noises[(direction + 2) % 3] = noises[3]
-        # self.noises[(direction + 1) % 3] = noises[1]
-        # self.noises[(direction + 3) % 3] = noises[2]
+        self.noises[direction] = noises[0]
+        self.noises[(direction + 2) % 4] = noises[3]
+        self.noises[(direction + 1) % 4] = noises[1]
+        self.noises[(direction + 3) % 4] = noises[2]
 
