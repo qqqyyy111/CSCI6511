@@ -1,9 +1,10 @@
 Description:
     1. In the value iteration, for each state, I calculate the 4 possible results, according to the results from the
     k-1 iteration, with noises and discount, then I compare these 4 values and leave the largest value.
-    2. In the policy iteration, I set a policy that all go left first. After the each iteration, for each state, I check
-    the 4 states values around that state, find the largest one as the main direction for the next iteration and update
-    the policy.
+    2. In the policy iteration, I set a policy that all go left first. Initially, the iteration will follow the the
+    policy until the convergence, then the program will check the results from one-step ahead, then update the new
+    policy according to the largest result. After that, the program will repeat the previous steps until the policy not
+    change anymore
 
 
 How to Run:
