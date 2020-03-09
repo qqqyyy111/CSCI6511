@@ -64,7 +64,7 @@ def policy_iteration(discount, noises, states, grid_size, difference_allowed):
 def init_policy(states, noises):
     for state in states.values():
         state.set_init_policy(noises)
-ß
+
 
 def do_several_policy_iterations(times, discount, noises, states, grid_size):
     return_states = copy(states)
