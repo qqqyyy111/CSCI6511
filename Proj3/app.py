@@ -14,8 +14,8 @@ k = 500
 
 print(f'The following is the output of the value iteration when k = {k}: ')
 states_after_value_iterations = do_several_value_iterations(k, discount, noises, states, size)
-print_states(states_after_value_iterations, size)
+print_states_neatly(states_after_value_iterations, size)
 
 print(f'The following is the output of the policy iteration when k = {k}: ')
 states_after_policy_iterations = do_several_policy_iterations(k, discount, noises, states, size)
-print_states(states_after_policy_iterations, size)
+print_states_neatly(states_after_policy_iterations, size)
