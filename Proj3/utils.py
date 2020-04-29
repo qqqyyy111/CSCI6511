@@ -27,6 +27,20 @@ def generate_grid_world(input_file):
     return discount, noises, states, grid_size
 
 
+def convert_dict_to_2d_list(object_dict, row_size, col_size):
+    res_list = []
+    for i in range(row_size):
+        row = []
+        for j in range(col_size):
+            cell = object_dict[(i, j)]
+            if cell.is_terminal:
+                row.append(cell.val)
+            else:
+                row.append(format(cell.val, '.2f'))
+        res_list.append(row)
+    return res_list
+
+
 def print_states(states, grid_size):
     for row_index in range(0, grid_size):
         row_str = ''
@@ -39,3 +53,12 @@ def print_states(states, grid_size):
                 row_str += ' '
         print(row_str)
 
+
+def print_states_neatly(states, grid_size):
+    converted_list = convert_dict_to_2d_list(states, grid_size, grid_size)
+    # print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in converted_list]))
+    s = [[str(cell) for cell in row] for row in converted_list]
+    lens = [max(map(len, col)) for col in zip(*s)]
+    fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+    table = [fmt.format(*row) for row in s]
+    print('\n'.join(table))
