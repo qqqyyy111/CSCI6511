@@ -1,7 +1,7 @@
 from utils import *
 from viterbiAlg import viterbi_dp
 
-input_file = './dice/hmm_dice_1586654132710.txt'
+input_file = './dice/hmm_dice_1586654620140.txt'
 hmm = file_reader(input_file)
 start_prob = [1/3, 1/3, 1/3]
 sequence_info = viterbi_dp(start_prob, hmm)
